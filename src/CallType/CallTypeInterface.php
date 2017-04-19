@@ -6,16 +6,15 @@
  * Time: 15:44
  */
 
-interface CallTypeInterface {
+interface CallTypeInterface
+{
+    /**
+     * @return String Returns the name of the function to call
+     */
+    public function method();
 
-  /**
-   * @return String Returns the name of the function to call
-   */
-  public function method();
-
-
-  /**
-   * @return stdClass Returns formatted data to be sent.
-   */
-  public function data();
+    /**
+     * @return stdClass Returns formatted data to be sent.
+     */
+    public function data();
 }

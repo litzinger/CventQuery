@@ -16,26 +16,32 @@ namespace CventQuery\QueryType;
  *
  * Description:
  */
-class RetrieveQuery extends BaseQuery {
+class RetrieveQuery extends BaseQuery
+{
+    const RETRIEVE_CALL_NAME = "Retrieve";
 
-  const RETRIEVE_CALL_NAME = "Retrieve";
+    protected $ids;
 
-  protected $ids;
+    /**
+     * RetrieveQuery constructor.
+     * @param \CventQuery\CventConnection $connection
+     */
+    public function __construct(\CventQuery\CventConnection $connection)
+    {
+        parent::__construct($connection, self::RETRIEVE_CALL_NAME);
 
-  public function __construct(\CventQuery\CventConnection $connection) {
-    parent::__construct($connection, self::RETRIEVE_CALL_NAME);
-
-    $this->ids = [];
-  }
-
-  public function id(array $ids){
-    if(empty($ids)){
-      throw new \InvalidArgumentException("Invalid values detected. ");
+        $this->ids = [];
     }
 
-    $this->ids = $ids;
+    public function id(array $ids)
+    {
+        if (empty($ids)) {
+            throw new \InvalidArgumentException("Invalid values detected. ");
+        }
 
-    return $this;
-  }
+        $this->ids = $ids;
+
+        return $this;
+    }
 
 }

@@ -21,107 +21,110 @@ use CventQuery\CallType\RetrieveCall;
  * Created:  2015.11.03
  *
  */
-class CventQuery {
+class CventQuery
+{
+    /**
+     * @var CventObjectInterface
+     */
+    private $cventObject;
 
-  /**
-   * @var CventObjectInterface
-   */
-  private $cventObject;
+    /**
+     * @var SearchCall
+     */
+    private $search;
 
-  /**
-   * @var SearchCall
-   */
-  private $search;
+    /**
+     * @var RetrieveCall
+     */
+    private $retrieve;
 
-  /**
-   * @var RetrieveCall
-   */
-  private $retrieve;
+    /**
+     * @var array An array of object Ids
+     */
+    private $objectIds;
 
-  /**
-   * @var array An array of object Ids
-   */
-  private $objectIds;
+    /**
+     * @var CventConnection
+     */
+    protected $connection;
 
-  /**
-   * @var CventConnection
-   */
-  protected $connection;
+    /**
+     * CventQuery constructor.
+     *
+     * @param \CventQuery\CventConnection $connection
+     * @param \CventQuery\CventObject\CventObjectInterface $cventObject
+     */
+    public function __construct(CventConnection $connection, CventObjectInterface $cventObject)
+    {
 
-  /**
-   * CventQuery constructor.
-   *
-   * @param \CventQuery\CventConnection                  $connection
-   * @param \CventQuery\CventObject\CventObjectInterface $cventObject
-   */
-  public function __construct(CventConnection $connection, CventObjectInterface $cventObject) {
+        $this->search = new SearchCall($cventObject);
+        $this->retrieve = new RetrieveCall($cventObject);
 
-    $this->search = new SearchCall($cventObject);
-    $this->retrieve = new RetrieveCall($cventObject);
-
-    $this->connection = $connection;
-    $this->cventObject = $cventObject;
-  }
-
-
-  public function get() {
-    $results = [];
-
-    if(empty($this->objectIds)){
-      $this->objectIds = $this->getSearchQueryResults();
+        $this->connection = $connection;
+        $this->cventObject = $cventObject;
     }
 
-    $temp = $this->getRetrieveQueryResults($this->objectIds);
 
-    $this->objectIds = [];
+    public function get()
+    {
+        $results = [];
 
-    return $temp;
-  }
+        if (empty($this->objectIds)) {
+            $this->objectIds = $this->getSearchQueryResults();
+        }
 
-  public function where($paramName,$value,$operator="")
-  {
-    if(empty($operator)){
-      $operator = SearchOperator::EQUALS;
+        $temp = $this->getRetrieveQueryResults($this->objectIds);
+
+        $this->objectIds = [];
+
+        return $temp;
     }
 
-    $this->search->setFilter($paramName,$value,$operator);
+    public function where($paramName, $value, $operator = "")
+    {
+        if (empty($operator)) {
+            $operator = SearchOperator::EQUALS;
+        }
 
-    return $this;
-  }
+        $this->search->setFilter($paramName, $value, $operator);
 
-  public function find(array $ids){
-
-    $this->objectIds = $ids;
-  }
-
-  /**
-   * @return array
-   */
-  private function getSearchQueryResults(){
-    $searchResults = $this->connection->request($this->search->method(),$this->search->data());
-
-    $results = [];
-
-    if(isset($searchResults->SearchResult->Id)){
-      $results = $searchResults->SearchResult->Id;
+        return $this;
     }
 
-    return $results;
-  }
+    public function find(array $ids)
+    {
 
-  private function getRetrieveQueryResults(array $Ids)
-  {
-    $results = [];
-
-    $retrieveResults = $this->connection->request($this->retrieve->method(),$this->retrieve->whereIds($Ids)->data());
-
-    if(!empty($retrieveResults->RetrieveResult->CvObject)){
-      $results = $retrieveResults->RetrieveResult->CvObject;
+        $this->objectIds = $ids;
     }
 
-    return $results;
-  }
+    /**
+     * @return array
+     */
+    private function getSearchQueryResults()
+    {
+        $searchResults = $this->connection->request($this->search->method(), $this->search->data());
 
+        $results = [];
+
+        if (isset($searchResults->SearchResult->Id)) {
+            $results = $searchResults->SearchResult->Id;
+        }
+
+        return $results;
+    }
+
+    private function getRetrieveQueryResults(array $Ids)
+    {
+        $results = [];
+
+        $retrieveResults = $this->connection->request($this->retrieve->method(), $this->retrieve->whereIds($Ids)->data());
+
+        if (!empty($retrieveResults->RetrieveResult->CvObject)) {
+            $results = $retrieveResults->RetrieveResult->CvObject;
+        }
+
+        return $results;
+    }
 
 
 }

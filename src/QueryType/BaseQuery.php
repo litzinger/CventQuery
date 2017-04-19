@@ -19,52 +19,52 @@ use CventQuery\CventObject\CventObjectInterface;
  *
  * Description:
  */
-class BaseQuery implements QueryTypeInterface {
+class BaseQuery implements QueryTypeInterface
+{
+    /**
+     * @var CventConnection
+     */
+    protected $conn;
 
-  /**
-   * @var CventConnection
-   */
-  protected $conn;
+    /**
+     * @var String The Cvent call type. Ex. Search, Retrieve, etc...
+     */
+    protected $callName;
 
-  /**
-   * @var String The Cvent call type. Ex. Search, Retrieve, etc...
-   */
-  protected $callName;
+    /**
+     * @var mixed array|stdClass
+     */
+    protected $parameters;
 
-  /**
-   * @var mixed array|stdClass
-   */
-  protected $parameters;
-
-  /**
-   * BaseQuery constructor.
-   *
-   * @param \CventQuery\CventConnection $connection
-   * @param String                      $cventCallName
-   */
-  public function __construct(CventConnection $connection, $cventCallName, $queryParameters) {
-    $this->conn = $connection;
-    $this->callName = $cventCallName;
-
-    $this->parameters = $queryParameters;
-  }
-
-  /**
-   * @return object
-   *
-   * @throws \SoapFault
-   */
-  public function call() {
-
-    $results = [];
-
-    try {
-      $results = $this->conn->request($this->callName, $this->parameters);
-    } catch (\SoapFault $e) {
-      return $e->getMessage();
+    /**
+     * BaseQuery constructor.
+     *
+     * @param \CventQuery\CventConnection $connection
+     * @param String $cventCallName
+     * @param $queryParameters
+     */
+    public function __construct(CventConnection $connection, $cventCallName, $queryParameters)
+    {
+        $this->conn = $connection;
+        $this->callName = $cventCallName;
+        $this->parameters = $queryParameters;
     }
 
-    return $results;
-  }
+    /**
+     * @return object
+     *
+     * @throws \SoapFault
+     */
+    public function call()
+    {
+        $results = [];
 
+        try {
+            $results = $this->conn->request($this->callName, $this->parameters);
+        } catch (\SoapFault $e) {
+            return $e->getMessage();
+        }
+
+        return $results;
+    }
 }

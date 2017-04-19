@@ -5,52 +5,67 @@ use CventQuery\CventObject\CventObjectType;
 use CventQuery\CallType\CallTypeInterface;
 use stdClass;
 
-abstract class BaseCall implements CallTypeInterface{
+abstract class BaseCall implements CallTypeInterface
+{
+    /**
+     * @var String
+     */
+    protected $callName;
 
-  /**
-   * @var String
-   */
-  protected $callName;
+    /**
+     * @var stdClass
+     */
+    protected $data;
 
-  /**
-   * @var stdClass
-   */
-  protected $data;
+    /**
+     * @param $callName
+     * @param $objectType
+     */
+    public function __construct($callName, $objectType)
+    {
+        $this->callName = $callName;
 
-  public function __construct($callName, $objectType) {
+        $this->data = new stdClass();
+        $this->data->ObjectType = $objectType;
+    }
 
-    $this->callName = $callName;
+    /**
+     * @param \CventQuery\CventConnection $connection
+     *
+     * @return mixed
+     */
+    public function runQuery(CventConnection $connection)
+    {
+        return $connection->request($this->callName, $this->data);
+    }
 
-    $this->data = new stdClass();
-    $this->data->ObjectType = $objectType;
-  }
+    /**
+     * @param $paramName
+     * @param $value
+     */
+    public function setParameter($paramName, $value)
+    {
+        $this->data->{$paramName} = $value;
+    }
 
-  /**
-   * @param \CventQuery\CventConnection $connection
-   *
-   * @return mixed
-   */
-  public function runQuery(CventConnection $connection) {
-    return $connection->request($this->callName, $this->data);
-  }
+    /**
+     * @param stdClass $data
+     * @return $this
+     */
+    public function withData(stdClass $data)
+    {
+        $this->data = $data;
 
-  public function setParameter($paramName,$value){
-    $this->data->{$paramName} = $value;
-  }
+        return $this;
+    }
 
+    public function method()
+    {
+        return $this->callName;
+    }
 
-  public function withData(stdClass $data) {
-    $this->data = $data;
-
-    return $this;
-  }
-
-  public function method() {
-    return $this->callName;
-  }
-
-  public function data() {
-    return $this->data;
-  }
-
+    public function data()
+    {
+        return $this->data;
+    }
 }

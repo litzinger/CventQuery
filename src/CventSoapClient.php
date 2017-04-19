@@ -5,87 +5,98 @@ use SoapFault;
 use \CventQuery\CventLoginCredentials;
 
 
-class CventSoapClient {
+class CventSoapClient
+{
+    /**
+     * @var String
+     */
+    protected $wsdl;
 
-  /**
-   * @var String
-   */
-  protected $wsdl;
+    /**
+     * @var SoapClient
+     */
+    protected $soapClient;
 
-  /**
-   * @var SoapClient
-   */
-  protected $soapClient;
+    /**
+     * @var array
+     */
+    protected $soapOptions;
 
-  /**
-   * @var array
-   */
-  protected $soapOptions;
+    protected $cventSessionHeader;
 
-  protected $cventSessionHeader;
+    /**
+     * @param null $wsdl
+     * @param bool $debug
+     */
+    public function __construct($wsdl = null, $debug = false)
+    {
 
-  public function __construct($wsdl=null,$debug=false) {
+        if (empty($wsdl)) {
+            throw new \InvalidArgumentException("We need a wsdl file");
+        }
 
-    if(empty($wsdl)){
-      throw new \InvalidArgumentException("We need a wsdl file");
+        $this->wsdl = $wsdl;
+
+        $this->soapOptions = [
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
+        ];
+
+        if ($debug) {
+            $this->debug();
+        }
+
+        $this->soapClient = new SoapClient($this->wsdl, $this->soapOptions);
     }
 
-    $this->wsdl = $wsdl;
-
-    $this->soapOptions = [
-      'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
-    ];
-
-    if($debug){
-      $this->debug();
+    public function debug($trace = 1, $exceptions = 1)
+    {
+        $this->soapOptions += [
+            'trace' => $trace,
+            'exceptions' => $exceptions
+        ];
     }
 
-    $this->soapClient = new SoapClient($this->wsdl, $this->soapOptions);
-  }
+    /**
+     * @return \SoapClient
+     */
+    public function client()
+    {
+        return $this->soapClient;
+    }
 
-  public function debug($trace = 1, $exceptions = 1) {
-    $this->soapOptions += [
-      'trace' => $trace,
-      'exceptions' => $exceptions
-    ];
-  }
+    public function call($method, $data)
+    {
+        $results = $this->soapClient->$method($data);
 
-  /**
-   * @return \SoapClient
-   */
-  public function client()
-  {
-    return $this->soapClient;
-  }
+        return $results;
+    }
 
-  public function call($method,$data)
-  {
-    $results = $this->soapClient->$method($data);
-    return $results;
-  }
+    /**
+     *
+     * @return CventSoapClient
+     */
+    public static function connect($wsdl = null, $debug = false)
+    {
+        return new CventSoapClient($wsdl, $debug);
+    }
 
-  /**
-   *
-   * @return CventSoapClient
-   */
-  public static function connect($wsdl=null,$debug=false) {
+    public function setHeader(\SoapHeader $header)
+    {
+        $this->soapClient->__setSoapHeaders($header);
+    }
 
-    return new CventSoapClient($wsdl,$debug);
-  }
+    public function makeCventSessionHeader($headerValue)
+    {
 
-  public function setHeader(\SoapHeader $header){
-    $this->soapClient->__setSoapHeaders($header);
-  }
+    }
 
-  public function makeCventSessionHeader($headerValue){
-
-  }
-
-  public function setLocation($url){
-    $this->soapClient->__setLocation($url);
-  }
-
-
+    /**
+     * @param $url
+     */
+    public function setLocation($url)
+    {
+        $this->soapClient->__setLocation($url);
+    }
 }
 
 

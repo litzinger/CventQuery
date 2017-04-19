@@ -17,42 +17,53 @@ use CventQuery\CventObject\CventObjectInterface;
  *
  * Description:
  */
-class BaseCventObject implements CventObjectInterface{
+class BaseCventObject implements CventObjectInterface
+{
+    /**
+     * @var string
+     */
+    protected $type;
 
-  /**
-   * @var string
-   */
-  protected $type;
+    /**
+     * @var mixed
+     */
+    protected $parameters;
 
-  /**
-   * @var mixed
-   */
-  protected $parameters;
+    /**
+     * @param string $type
+     */
+    public function __construct($type = "")
+    {
+        if (empty($type)) {
+            throw new \InvalidArgumentException("The CventObject type must be delcared");
+        }
 
-  public function __construct($type="") {
-    if(empty($type)){
-      throw new \InvalidArgumentException("The CventObject type must be delcared");
+        $this->type = $type;
+
     }
 
-    $this->type = $type;
+    public function type()
+    {
+        return $this->type;
+    }
 
-  }
+    public function prepared()
+    {
+        throw new \BadMethodCallException("This method must be implemented in child class");
+    }
 
-  public function type()
-  {
-    return $this->type;
-  }
+    public function parameters()
+    {
+        return $this->parameters;
+    }
 
-  public function prepared() {
-    throw new \BadMethodCallException("This method must be implemented in child class");
-  }
-
-  public function parameters() {
-    return $this->parameters;
-  }
-
-  public function setParameter($name, $value) {
-    throw new \BadMethodCallException("You have to implement this function for each query type");
-  }
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function setParameter($name, $value)
+    {
+        throw new \BadMethodCallException("You have to implement this function for each query type");
+    }
 
 }

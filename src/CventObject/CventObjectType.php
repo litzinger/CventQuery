@@ -1,9 +1,8 @@
-<?php namespace CventQuery\CventObject;
+<?php
 
+namespace CventQuery\CventObject;
 
-abstract class CventObjectType {
-
-  const EVENT = "Event";
-
-
+abstract class CventObjectType
+{
+    const EVENT = "Event";
 }

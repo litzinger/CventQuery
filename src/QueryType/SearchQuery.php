@@ -20,30 +20,27 @@ use stdClass;
  *
  * Description:
  */
-class SearchQuery extends BaseQuery {
+class SearchQuery extends BaseQuery
+{
+    private $orSearch = 'OrSearch';
+    private $andSearch = 'AndSearch';
 
+    private $searchObject;
+    private $parameters;
 
-  private $orSearch = 'OrSearch';
-  private $andSearch = 'AndSearch';
+    protected $cventObject;
 
-  private $searchObject;
-  private $parameters;
+    public function __construct(CventConnection $connection, CventObjectInterface $cventObject)
+    {
+        // default parameters for the search object
+        $this->searchObject = new stdClass();
+        $this->searchObject->SearchType = $this->orSearch;
 
-  protected $cventObject;
+        $this->parameters = new stdClass();
+        $this->parameters->ObjectType = $cventObject->type();
+        $this->parameters->CvSearchObject = new stdClass();
+        $this->parameters->CvSearchObject = $this->searchObject;
 
-  public function __construct(CventConnection $connection, CventObjectInterface $cventObject){
-
-    // default parameters for the search object
-    $this->searchObject = new stdClass();
-    $this->searchObject->SearchType = $this->orSearch;
-
-    $this->parameters = new stdClass();
-    $this->parameters->ObjectType = $cventObject->type();
-    $this->parameters->CvSearchObject = new stdClass();
-    $this->parameters->CvSearchObject = $this->searchObject;
-
-    parent::__construct($connection,self::SEARCH_CALL_NAME, $this->parameters);
-  }
-
-
+        parent::__construct($connection, self::SEARCH_CALL_NAME, $this->parameters);
+    }
 }
