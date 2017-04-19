@@ -64,11 +64,8 @@ class CventQuery
         $this->cventObject = $cventObject;
     }
 
-
     public function get()
     {
-        $results = [];
-
         if (empty($this->objectIds)) {
             $this->objectIds = $this->getSearchQueryResults();
         }
@@ -80,6 +77,12 @@ class CventQuery
         return $temp;
     }
 
+    /**
+     * @param $paramName
+     * @param $value
+     * @param string $operator
+     * @return $this
+     */
     public function where($paramName, $value, $operator = "")
     {
         if (empty($operator)) {
@@ -91,9 +94,11 @@ class CventQuery
         return $this;
     }
 
+    /**
+     * @param array $ids
+     */
     public function find(array $ids)
     {
-
         $this->objectIds = $ids;
     }
 
@@ -113,6 +118,10 @@ class CventQuery
         return $results;
     }
 
+    /**
+     * @param array $Ids
+     * @return array
+     */
     private function getRetrieveQueryResults(array $Ids)
     {
         $results = [];
@@ -125,6 +134,4 @@ class CventQuery
 
         return $results;
     }
-
-
 }

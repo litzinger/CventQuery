@@ -1,17 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/5/15
- * Time: 14:35
- */
 
 namespace CventQuery\CventObject;
-
-use CventQuery\CventObject\BaseCventObject;
-use CventQuery\QueryType\SearchQuery;
-use stdClass;
-
 
 /**
  * File: EventCventObject.php
@@ -29,6 +18,7 @@ class Event extends BaseCventObject
     const EVENT_STATUS_CLOSED = "Closed";
 
     //available event fields
+    const FIELD_EVENT_CODE = 'EventCode';
     const FIELD_EVENT_TITLE = 'EventTitle';
     const FIELD_EVENT_STATUS = 'EventStatus';
 
@@ -36,5 +26,4 @@ class Event extends BaseCventObject
     {
         parent::__construct(CventObjectType::EVENT);
     }
-
 }
