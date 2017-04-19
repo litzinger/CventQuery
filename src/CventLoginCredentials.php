@@ -1,4 +1,6 @@
-<?php namespace CventQuery;
+<?php
+
+namespace CventQuery;
 
 class CventLoginCredentials
 {
@@ -34,11 +36,16 @@ class CventLoginCredentials
     /**
      * @return array
      */
-    public function __toArray() {
+    public function toArray() {
         return [
             'AccountNumber' => $this->AccountNumber,
             'UserName' => $this->UserName,
             'Password' => $this->Password,
         ];
+    }
+
+
+    public function __toArray() {
+        return $this->toArray();
     }
 }
