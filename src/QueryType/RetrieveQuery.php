@@ -1,21 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/9/15
- * Time: 17:30
- */
 
 namespace CventQuery\QueryType;
 
-
-/**
- * File: RetrieveQuery.php
- * Author: goce
- * Created:  2015.11.09
- *
- * Description:
- */
 class RetrieveQuery extends BaseQuery
 {
     const RETRIEVE_CALL_NAME = "Retrieve";

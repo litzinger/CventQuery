@@ -1,4 +1,6 @@
-<?php namespace CventQuery\CallType;
+<?php
+
+namespace CventQuery\CallType;
 
 use CventQuery\CventConnection;
 use CventQuery\CventObject\CventObjectType;

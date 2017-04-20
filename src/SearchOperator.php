@@ -1,21 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/11/15
- * Time: 13:26
- */
 
 namespace CventQuery;
 
-
-/**
- * File: SearchOperatorType.php
- * Author: goce
- * Created:  2015.11.11
- *
- * Description:
- */
 class SearchOperator
 {
     const EQUALS = "Equals";
@@ -29,5 +15,4 @@ class SearchOperator
     const STARTS_WITH = "Starts with";
     const INCLUDES = "Includes";
     const EXCLUDES = "Excludes";
-
 }

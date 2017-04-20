@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/4/15
- * Time: 17:30
- */
 
 namespace CventQuery\QueryType;
 
@@ -13,13 +7,6 @@ use CventQuery\CventObject\CventObjectInterface;
 use CventQuery\CventObject\EventCventObject;
 use stdClass;
 
-/**
- * File: SearchQuery.php
- * Author: goce
- * Created:  2015.11.04
- *
- * Description:
- */
 class SearchQuery extends BaseQuery
 {
     private $orSearch = 'OrSearch';

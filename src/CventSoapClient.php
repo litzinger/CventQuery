@@ -1,9 +1,8 @@
-<?php namespace CventQuery;
+<?php
+
+namespace CventQuery;
 
 use SoapClient;
-use SoapFault;
-use \CventQuery\CventLoginCredentials;
-
 
 class CventSoapClient
 {
@@ -64,6 +63,11 @@ class CventSoapClient
         return $this->soapClient;
     }
 
+    /**
+     * @param $method
+     * @param $data
+     * @return mixed
+     */
     public function call($method, $data)
     {
         $results = $this->soapClient->$method($data);
@@ -72,7 +76,8 @@ class CventSoapClient
     }
 
     /**
-     *
+     * @param null $wsdl
+     * @param bool $debug
      * @return CventSoapClient
      */
     public static function connect($wsdl = null, $debug = false)

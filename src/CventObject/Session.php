@@ -2,15 +2,16 @@
 
 namespace CventQuery\CventObject;
 
+use CventQuery\Enum\ObjectType;
+
 class Session extends BaseCventObject
 {
-    //available event fields
-    const FIELD_EVENT_CODE = 'EventCode';
-    const FIELD_EVENT_TITLE = 'EventTitle';
-    const FIELD_EVENT_STATUS = 'EventStatus';
+    // Available event fields
+    const FIELD_NAME = 'ProductName';
+    const FIELD_STATUS = 'Status';
 
     public function __construct()
     {
-        parent::__construct(CventObjectType::EVENT);
+        parent::__construct(ObjectType::SESSION);
     }
 }

@@ -1,22 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/5/15
- * Time: 14:37
- */
 
 namespace CventQuery\CventObject;
 
-use CventQuery\CventObject\CventObjectInterface;
-
-/**
- * File: BaseCventObject.php
- * Author: goce
- * Created:  2015.11.05
- *
- * Description:
- */
 class BaseCventObject implements CventObjectInterface
 {
     /**

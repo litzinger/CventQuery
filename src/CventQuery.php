@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/3/15
- * Time: 17:35
- */
 
 namespace CventQuery;
 
@@ -14,13 +8,6 @@ use CventQuery\QueryType\QueryTypeInterface;
 use CventQuery\CallType\SearchCall;
 use CventQuery\CallType\RetrieveCall;
 
-
-/**
- * File: Cvent.php
- * Author: goce
- * Created:  2015.11.03
- *
- */
 class CventQuery
 {
     /**
@@ -56,7 +43,6 @@ class CventQuery
      */
     public function __construct(CventConnection $connection, CventObjectInterface $cventObject)
     {
-
         $this->search = new SearchCall($cventObject);
         $this->retrieve = new RetrieveCall($cventObject);
 

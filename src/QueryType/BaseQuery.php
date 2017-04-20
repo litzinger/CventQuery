@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/4/15
- * Time: 11:50
- */
 
 namespace CventQuery\QueryType;
 
@@ -12,13 +6,6 @@ use CventQuery\CventConnection;
 use BadMethodCallException;
 use CventQuery\CventObject\CventObjectInterface;
 
-/**
- * File: QueryBase.php
- * Author: goce
- * Created:  2015.11.04
- *
- * Description:
- */
 class BaseQuery implements QueryTypeInterface
 {
     /**

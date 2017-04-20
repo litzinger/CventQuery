@@ -1,4 +1,6 @@
-<?php namespace CventQuery\CventObject;
+<?php
+
+namespace CventQuery\CventObject;
 
 interface CventObjectInterface
 {

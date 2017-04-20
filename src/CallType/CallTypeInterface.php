@@ -1,10 +1,6 @@
-<?php namespace CventQuery\CallType;
-/**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/13/15
- * Time: 15:44
- */
+<?php
+
+namespace CventQuery\CallType;
 
 interface CallTypeInterface
 {

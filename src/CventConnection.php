@@ -1,4 +1,6 @@
-<?php namespace CventQuery;
+<?php
+
+namespace CventQuery;
 
 use CventQuery\CventLoginCredentials;
 use CventQuery\CventSoapClient;

@@ -1,18 +1,13 @@
-<?php namespace CventQuery\CallType;
+<?php
+
+namespace CventQuery\CallType;
 
 use CventQuery\CventConnection;
 use CventQuery\CventObject\CventObjectInterface;
 use stdClass;
 
 /**
- * Created by PhpStorm.
- * User: goce
- * Date: 11/10/15
- * Time: 11:42
- *
  * Responsible for running a SearchCall against cvent's soap apis
- *
- *
  */
 class SearchCall extends BaseCall
 {
