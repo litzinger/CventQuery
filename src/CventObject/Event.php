@@ -7,9 +7,11 @@ use CventQuery\Enum\ObjectType;
 class Event extends BaseCventObject
 {
     // Available event fields
+    const FIELD_ID = 'EventId';
     const FIELD_CODE = 'EventCode';
     const FIELD_TITLE = 'EventTitle';
     const FIELD_STATUS = 'EventStatus';
+    const FIELD_LAST_MODIFIED = 'LastModifiedDate';
 
     public function __construct()
     {
