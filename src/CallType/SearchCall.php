@@ -53,7 +53,6 @@ class SearchCall extends BaseCall
         $this->filters[] = $filter;
     }
 
-
     private function prepData()
     {
         $this->data->CvSearchObject = $this->cvSearchObject;

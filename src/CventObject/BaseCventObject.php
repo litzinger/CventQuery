@@ -24,7 +24,6 @@ class BaseCventObject implements CventObjectInterface
         }
 
         $this->type = $type;
-
     }
 
     public function type()
@@ -42,13 +41,8 @@ class BaseCventObject implements CventObjectInterface
         return $this->parameters;
     }
 
-    /**
-     * @param $name
-     * @param $value
-     */
     public function setParameter($name, $value)
     {
         throw new \BadMethodCallException("You have to implement this function for each query type");
     }
-
 }

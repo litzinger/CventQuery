@@ -13,4 +13,5 @@ class ObjectType extends Enum
     const EVENT = 'Event';
     const SESSION = 'Session';
     const SPEAKER = 'Speaker';
+    const ASSIGNED_SESSION = 'AssignedSession';
 }
