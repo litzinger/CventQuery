@@ -7,6 +7,7 @@ use CventQuery\Enum\ObjectType;
 class Speaker extends BaseCventObject
 {
     const FIELD_ID = 'SpeakerId';
+    const FIELD_EVENT_ID = 'EventId';
     const FIELD_FIRST_NAME = 'FirstName';
     const FIELD_LAST_NAME = 'LastName';
     const FIELD_EMAIL = 'EmailAddress';
