@@ -1,5 +1,27 @@
 # CventQuery
+
 Php library used to interact and query Cvent Soap API
+
+## Example Usage
+
+```
+$cvent = new Cvent([
+    'wdslUrl' => '',
+    'account' => '',
+    'username' => '',
+    'password' => '',
+]);
+
+$response = new XmlResponse();
+
+$event = $cvent->getCurrentEvent();
+$sessions = $cvent->getSessions($event);
+$speakers = $cvent->getSpeakers($event);
+
+$response
+    ->create($event, $sessions, $speakers)
+    ->send();
+```
 
 ```
 <?php
